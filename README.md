@@ -1,4 +1,6 @@
 algo-interview
 ==============
+Author: Rui Han, iurnah
+Email: iurnah@gmail.com
 
-algorithm and data structure practice repository
+basic algorithm and data structure practice repository
