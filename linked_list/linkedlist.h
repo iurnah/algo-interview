@@ -10,7 +10,14 @@ struct node
 
 typedef node *linkp;
 
+void generate(linkp a, int n);
+
+linkp insertion_sort(linkp a);
+
+void print_item(linkp list);
+
 linkp reverse(linkp x);
+
 void Josephus(int n, int m);
 
 #endif
