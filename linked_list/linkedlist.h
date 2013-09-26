@@ -20,4 +20,8 @@ linkp reverse(linkp x);
 
 void Josephus(int n, int m);
 
+//TODO: write all those linkedlist functions
+//int length()
+//int push()
+//
 #endif
