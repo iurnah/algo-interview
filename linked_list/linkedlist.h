@@ -4,24 +4,31 @@
 #include "common.h"
 struct node
 {	int item; node* next;
-	node(int x, node* t)
-		{ item = x; next = t; }
+	node(int x)
+		{ item = x; next = NULL; }
 };
 
 typedef node *linkp;
 
-void generate(linkp a, int n);
 
-linkp insertion_sort(linkp a);
+void generate(linkp head, int n);
+
+void generate_v1(linkp* head, int n);
 
 void print_item(linkp list);
+
+// TODO: write all those linkedlist functions
+// KEY 1: Push() at the head and Push() at the tail. Pay special attention to the
+// zero element list.
+void push(linkp* headRef, int item);
 
 linkp reverse(linkp x);
 
 void Josephus(int n, int m);
 
-//TODO: write all those linkedlist functions
 //int length()
 //int push()
-//
+//int popy()
+//int append()
+//int 
 #endif
