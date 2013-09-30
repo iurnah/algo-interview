@@ -7,15 +7,13 @@
 void generate(linkp a, int n)
 {	//node heada(0, 0);
 	//linkp t = &heada;
-	for (int i = 0; i < n; i++)
-		a = (a->next = new node(rand() % 1000, 0));	
-	
-	//return t;
+	linkp t = a;
+	for (int i = 0; i < n-1; i++)
+		t = t->next = new node(rand() % 1000, 0);	
 }
 
 /*
  * Insertion sort of linked list
- * 
  */
 linkp insertion_sort(linkp a)
 {	node headb(0, 0);
@@ -38,6 +36,7 @@ void print_item(linkp list)
 {	
 	//list = list->next; //skip the header
 	for (;list->next != 0; list=list->next)
+		cout << list->item << endl;
 	cout << list->item << endl;
 }
 

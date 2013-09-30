@@ -5,14 +5,14 @@ int main()
 {	
 	
 	//2. insertion sort of a random linkedlist
-	node list(0,0);
+	node list(8,0);
 	generate(&list, 5);
 	cout << "Generated list: " << endl;
 	print_item(&list);
-	insertion_sort(&list);
-	cout << "insertion sorted list: " << endl;
+	reverse(&list);
+	cout << "reverse sorted list: " << endl;
 	print_item(&list);
-
+    //cout << "finished !!!" << endl;
 	//1. test the circular linked list
 	//Josephus(9, 5);
 }
