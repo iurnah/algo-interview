@@ -8,8 +8,7 @@ struct node
 		{ item = x; next = NULL; }
 };
 
-typedef node *linkp;
-
+typedef node* linkp;
 
 void generate(linkp head, int n);
 
