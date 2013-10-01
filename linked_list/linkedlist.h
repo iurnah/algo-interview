@@ -12,7 +12,9 @@ typedef node* linkp;
 
 void generate(linkp head, int n);
 
-void generate_v1(linkp* head, int n);
+linkp generate_v0(linkp* headRef, int n); 
+
+void generate_v1(linkp* headRef, int n);
 
 void print_item(linkp list);
 

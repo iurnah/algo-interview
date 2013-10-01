@@ -5,22 +5,35 @@
 // of generating one for testing of ther functions.
 void generate(linkp head, int n)
 {	//linkp head = head;	
-	head->item = rand() % 1000;
-	cout << "in generate: " << endl;
-	cout << head->item << endl;
-	head->next = NULL;
-	for (int i = 1; i < n; i++){
-		head = head->next = new node(rand() % 1000);	
-		cout << head->item << endl;
-	}
+	if(n > 0){
+		head->item = rand() % 1000;
+		head->next = NULL;
+		for (int i = 1; i < n; i++){
+			head = head->next = new node(rand() % 1000);	
+			cout << head->item << endl;
+		}
+	}else 
+		return;
 	//head->next = NULL; //don't need it, it include in the constructor
 }
 
-// generate_v0():	generate a random link list, by calling the push() function
+// generate_v0():TODO:	generate a random link list, by calling the push() function
 // notice the subtle difference with the generate()
-void generate_v0(linkp head, int n)
+linkp generate_v0(linkp* headRef, int n)
 {
-	
+	//for(int i=1; i<=n; i++)
+		//push(headRef, rand()%1000);
+		cout << "begining of the generat_v0(): " << endl;
+		push(headRef, 88);
+		cout << "*headRef->item = " << (*headRef)->item << endl;
+		print_item(*headRef);
+		push(headRef, 77);
+		cout << "test: " << endl;
+		//cout << "*headRef->next->item = " << (*headRef)->next->item << endl;
+
+		cout << "in the generate_v0(): " << endl;
+		print_item(*headRef);
+	return *headRef;
 
 }
 
@@ -51,14 +64,15 @@ void print_item(linkp head)
 	cout << head->item << endl;
 }
 
-// push():	Push one element at the begining of a linked list
+// push():	Push one element at the begining of a linked list. Use a reference
+// pointer refer to the head of the list
 void push(linkp* headRef, int item)
 {	linkp new_node = new node(item);
 	if((*headRef)->next == NULL)
-		(*headRef)->next = new_node;
+		*headRef = new_node;
 	else {
-		new_node->next = (*headRef)->next;
-		(*headRef)->next = new_node;
+		new_node->next = *headRef;
+		*headRef = new_node;
 	}
 }
 

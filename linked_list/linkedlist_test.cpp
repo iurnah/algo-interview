@@ -7,7 +7,7 @@ int main()
 {	
 	//1. demo of generate and print a list
 	node* head = new node(0);
-	generate(head, 5);
+	generate(head, 1);
 	cout << "Generated list: " << endl;
 	print_item(head);
 	
@@ -29,8 +29,19 @@ int main()
 	print_item(head4);
 	push(&head4, 7);
 	push(&head4, 6);
+	push(&head4, 5);
+	push(&head4, 4);
+	push(&head4, 3);
+	push(&head4, 2);
 	cout << "push 7 at the begining of list with 5 element: " << endl;
 	print_item(head4);
-	//x. test the circular linked list
-	//Josephus(9, 5);
+
+	//TODO: why this is happened?
+	//4. demo of generate_v0(), which use push to build a linked list
+	node *head5 = new node(0);
+	head5 = generate_v0(&head5, 5);
+	cout << "generate_v0(): " << endl;
+	print_item(head5);
+
+	//5. demo of append a list
 }
