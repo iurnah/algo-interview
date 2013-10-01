@@ -38,6 +38,7 @@ int main()
 
 	//TODO: why this is happened?
 	//4. demo of generate_v0(), which use push to build a linked list
+	//node *head5 = new node(0);
 	node *head5 = new node(0);
 	head5 = generate_v0(&head5, 5);
 	cout << "generate_v0(): " << endl;

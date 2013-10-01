@@ -1,5 +1,8 @@
 #include "common.h"
 #include "linkedlist.h"
+//Documents TODO:
+//1. unify the method used in build a linked list, all without dummy node.
+
 
 // generate():	generate a random linked list, this is the straight foward way
 // of generating one for testing of ther functions.
@@ -68,12 +71,17 @@ void print_item(linkp head)
 // pointer refer to the head of the list
 void push(linkp* headRef, int item)
 {	linkp new_node = new node(item);
+	new_node->next = *headRef;
+	*headRef = new_node;
+
+/*
 	if((*headRef)->next == NULL)
 		*headRef = new_node;
 	else {
 		new_node->next = *headRef;
 		*headRef = new_node;
 	}
+*/
 }
 
 
