@@ -4,10 +4,12 @@
 //1. unify the method used in build a linked list, all without dummy node.
 
 
-// generate():	generate a random linked list, this is the straight foward way
-// of generating one for testing of ther functions.
-void generate(linkp head, int n)
-{	//linkp head = head;	
+// generate():	generate a random linked list. In order to use this function,
+// a node should be created in the test function, passing the node directly to
+// this function will connect the rest of the node by head->next, here we use a
+// trick to return the created list to the test function. 
+void generate_list(linkp head, int n)
+{	
 	if(n > 0){
 		head->item = rand() % 1000;
 		head->next = NULL;
@@ -17,7 +19,23 @@ void generate(linkp head, int n)
 		}
 	}else 
 		return;
-	//head->next = NULL; //don't need it, it include in the constructor
+}
+
+// generate():	generate a random linked list. To use this function, a header
+// pointer (node*) should be passed as argument, it doesn't need to be
+// initialized. we use pass by reference to modify the passed header pointer, so
+// as the created list can return to the test function.
+void generate_list_v1(linkp& head, int n)
+{	
+	linkp head_node = new node(rand() % 1000); 
+	head = head_node;
+	if(n > 0){
+		for (int i = 0; i < n; i++){
+			head_node = head_node->next = new node(rand() % 1000);	
+			cout << head_node->item << endl;
+		}
+	}else 
+		return;
 }
 
 // generate_v0():TODO:	generate a random link list, by calling the push() function
@@ -82,6 +100,113 @@ void push(linkp* headRef, int item)
 		*headRef = new_node;
 	}
 */
+}
+
+// list_to_BST(): convert a linked list to a balanced binary tree
+Tnode* list_to_BST(node * list, int start, int end)
+{
+	if (start > end) return NULL;
+	// same as (start+end)/2, avoids overflow
+	int mid = start + (end - start) / 2;
+	Tnode *leftChild = list_to_BST(list, start, mid - 1);
+	Tnode *parent = new Tnode(list->item);
+	parent->left = leftChild;
+	list = list->next;
+	parent->right = list_to_BST(list, mid + 1, end);
+	return parent;
+}
+
+// list_to_BST_wrapper(): a wapper function for list_to_BST conversion
+Tnode* list_to_BST_wrapper(node *head)
+{
+	int count = countNodes(head);
+	return list_to_BST(head, 0, count-1);
+}
+
+// BST_in_traversal_recur(): to print out the tree node in order.
+void BST_in_traversal_recur(Tnode *root)
+{
+	if(root == NULL)
+		return;
+
+	BST_in_traversal_recur(root->left);	
+	cout << root->item << endl;
+	BST_in_traversal_recur(root->right);	
+}
+
+// countLNodes(): count the total nodes in the linked list
+int countNodes(node *head)
+{
+    int count = 0;
+    node *temp = head;
+    while(temp)
+    {
+        temp = temp->next;
+        count++;
+    }
+    return count;
+}
+
+// getMiddle(): return the pointer point to the mid element
+//				modify the passed pre_slow, which is previous element 
+//				of mid
+//				To find the middle, I use fast walker and slow walker
+//				to iterate the list. 
+node *getMiddle(node *left, node **pre_slow)
+{
+	node *fast = left;
+	node *slow = left;
+	int flag = 0;
+
+	while(fast){
+		fast = fast->next;
+		flag++;
+
+		if(flag == 2){
+			*pre_slow = slow;
+			slow = slow->next;
+			flag = 0;
+		}
+	}	
+
+	return slow; 
+}
+
+// list_to_BST(): recursively call itself to convert the left sub-tree
+//				  and right sub-tree.
+//
+void list_to_BST_Rui(node *left, node *right, Tnode *root)
+{
+	node *pre_mid = NULL;
+	node *mid = getMiddle(left, &pre_mid); 
+	if(mid == right){//for the base case of two nodes.
+		root->item = mid->item;
+		Tnode *Tleft = new Tnode(left->item);
+		root->left = Tleft;
+		root->right = NULL;
+
+		return;
+	}else if(mid->next == right){//for the base case of three nodes.
+		root->item = mid->item;
+		Tnode *Tleft = new Tnode(left->item);
+		Tnode *Tright = new Tnode(right->item);
+		root->left = Tleft;
+		root->right = Tright;	
+
+		return;
+	}
+	
+	root->item = mid->item;
+
+	Tnode *root_left = new Tnode(0);	
+	Tnode *root_right = new Tnode(0);	
+	
+	list_to_BST_Rui(left, pre_mid, root_left);	//TODO this should be left to the node before mid 
+	list_to_BST_Rui(mid->next, right, root_right);
+
+	root->left = root_left;
+	root->right = root_right;
+
 }
 
 
